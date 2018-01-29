@@ -148,6 +148,8 @@
     <Compile Include="Requests\RegisterRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Responses\LoginResponse.cs" />
+    <Compile Include="Responses\UserProfileResponse.cs" />
+    <Compile Include="Responses\UserWalletResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
