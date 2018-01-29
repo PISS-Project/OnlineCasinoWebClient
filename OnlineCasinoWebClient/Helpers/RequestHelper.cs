@@ -5,11 +5,11 @@ using System.Text;
 
 namespace OnlineCasinoWebClient.Helpers
 {
-    public static class RequestHelper
+    internal static class RequestHelper
     {
         private static readonly string DomainName = "http://ocwebapi.azurewebsites.net/";
 
-        public static HttpRequestMessage GenerateRequestMessage(string url, HttpMethod method, string token = null, object json = null)
+        internal static HttpRequestMessage GenerateRequestMessage(string url, HttpMethod method, string token = null, object json = null)
         {
             var request = new HttpRequestMessage
             {

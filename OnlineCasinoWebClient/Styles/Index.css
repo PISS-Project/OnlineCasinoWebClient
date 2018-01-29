@@ -15,7 +15,7 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url("https://images2.alphacoders.com/280/280560.jpg");
+    background-image: url("~/Assets/IndexBackground.jpg");
     height: 100%;
 }
 

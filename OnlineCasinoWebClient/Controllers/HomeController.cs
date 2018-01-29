@@ -116,21 +116,15 @@ namespace OnlineCasinoWebClient.Controllers
                 }
                 else
                 {
-                    ViewBag.Message = "Error occured while trying to create an account!";
+                    ViewBag.Message = "Error occurred while trying to create an account!";
                     return await Task.FromResult(View("Index", "~/Views/Shared/_AuthenticationLayout.cshtml"));
                 }
             }
         }
 
         [HttpPost]
-        public async Task<ActionResult> Login(string username, string password, bool remember)
+        public async Task<ActionResult> Login(LoginRequest loginRequest, bool remember)
         {
-            var loginRequest = new
-            {
-                Username = username,
-                Password = password
-            };
-
             using (var client = new HttpClient())
             {
                 var request = RequestHelper.GenerateRequestMessage("api/logins", HttpMethod.Post, json: loginRequest);

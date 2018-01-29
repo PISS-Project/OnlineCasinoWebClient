@@ -108,6 +108,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\GamePlaceholderImage.jpg" />
+    <Content Include="Assets\IndexBackground.jpg" />
+    <Content Include="Assets\UserAvatar.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -124,6 +126,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\bootstrap-confirmation.js" />
     <Content Include="Scripts\index.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -146,9 +149,16 @@
     </Compile>
     <Compile Include="Helpers\RequestHelper.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Requests\ChangePasswordRequest.cs" />
+    <Compile Include="Requests\DeleteAccountRequest.cs" />
+    <Compile Include="Requests\DepositRequest.cs" />
+    <Compile Include="Requests\EditProfileDataRequest.cs" />
+    <Compile Include="Requests\LoginRequest.cs" />
     <Compile Include="Requests\RegisterRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Responses\DepositResponse.cs" />
     <Compile Include="Responses\LoginResponse.cs" />
+    <Compile Include="Responses\UserEditResponse.cs" />
     <Compile Include="Responses\UserProfileResponse.cs" />
     <Compile Include="Responses\UserWalletResponse.cs" />
   </ItemGroup>
@@ -163,6 +173,9 @@
     <Content Include="Views\Home\Home.cshtml" />
     <Content Include="Views\Shared\_UserProfile.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Profile\Edit.cshtml" />
+    <Content Include="Views\Profile\Deposit.cshtml" />
+    <Content Include="Views\Profile\ChangePassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -172,6 +185,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\User\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

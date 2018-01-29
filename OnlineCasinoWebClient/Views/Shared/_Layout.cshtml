@@ -6,7 +6,11 @@
     <title>@ViewBag.Title</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap-confirmation.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -20,7 +24,7 @@
                 </button>
                 @Html.ActionLink("Online Casino", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            
+
             @Html.Action("UserProfile", "Profile")
 
         </div>
@@ -33,8 +37,5 @@
             <p>&copy; @DateTime.Now.Year - Online Casino</p>
         </footer>
     </div>
-
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>
