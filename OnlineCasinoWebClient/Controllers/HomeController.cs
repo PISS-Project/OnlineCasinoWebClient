@@ -166,5 +166,41 @@ namespace OnlineCasinoWebClient.Controllers
                 }
             }
         }
+
+        public async Task<ActionResult> Logout()
+        {
+            var cookies = HttpContext.Request.Cookies;
+            var lId = cookies["loginId"];
+            var uId = cookies["userId"];
+            var token = cookies["token"];
+
+            if (lId != null && uId != null && token != null)
+            {
+                if (int.TryParse(lId.Value, out int loginId)
+                    && int.TryParse(uId.Value, out int userId))
+                {
+                    using (var client = new HttpClient())
+                    {
+                        var request = RequestHelper.GenerateRequestMessage($"api/logins/{loginId}", HttpMethod.Delete, token: token.Value);
+                        var response = await client.SendAsync(request);
+                        var statusCode = response.StatusCode;
+
+                        if (statusCode == HttpStatusCode.NoContent)
+                        {
+                            Session.RemoveAll();
+                            foreach (var cookie in cookies.AllKeys)
+                            {
+                                HttpContext.Response.Cookies[cookie].Expires = DateTime.Now.AddDays(-1);
+                            }
+                            return await Task.FromResult(RedirectToAction("Index", "Home"));
+                        }
+                    }
+                }
+            }
+
+            Session.RemoveAll();
+            ViewBag.Message = "Invalid cookies. Please try again!";
+            return await Task.FromResult(RedirectToAction("Index", "Home"));
+        }
     }
 }

@@ -21,7 +21,7 @@
                 @Html.ActionLink("Online Casino", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             
-            <p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link">Mark Otto <span class="badge">5000</span></a></p>
+            @Html.Action("UserProfile", "Profile")
 
         </div>
     </div>
