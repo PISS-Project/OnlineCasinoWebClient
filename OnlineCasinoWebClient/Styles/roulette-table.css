@@ -26,7 +26,7 @@
         border-spacing: 0;
         border-collapse: collapse;
         border: 2px solid white;
-        width:54px;
+        width: 54px;
         height: 48px;
         text-align: center;
         vertical-align: middle;
@@ -82,21 +82,18 @@
 
     /* cells hovers */
     .roulette .sector.hover,
-    .roulette .num.hover {
-        
+    .roulette .tnum.hover {
         -moz-box-shadow: inset 0 0 5px #FFF, inset 0 0 5px #FFF;
         -webkit-box-shadow: inset 0 0 5px #FFF, inset 0 0 5px #FFF;
         box-shadow: inset 0 0 5px #FFF, inset 0 0 5px #FFF;
     }
 
     .roulette .sector.hover {
-        
         background: #1C9022 !important;
         color: #FBEC0F !important;
     }
 
     .roulette .green.hover {
-        
         background: #3CC042 !important;
         color: #FBEC0F !important;
     }
@@ -109,6 +106,10 @@
     .roulette .black.hover {
         background: #000 !important;
         color: #FBEC0F !important;
+    }
+    .roulette .sector.active,
+    .roulette .tnum.active  {
+        color: dodgerblue !important;
     }
     /* orientation */
     .roulette .vt {
@@ -312,9 +313,8 @@
         .roulette .controlls .col13 .cm {
             left: 94.21%;
         }
-        
+
 /* others */
 .hidden {
     display: none;
 }
-
