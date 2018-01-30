@@ -126,6 +126,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\betHandler.js" />
     <Content Include="Scripts\bootstrap-confirmation.js" />
     <Content Include="Scripts\dice.js" />
     <Content Include="Scripts\index.js" />
@@ -137,9 +138,14 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\jquery.keyframes.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\roulette-table.js" />
+    <Content Include="Scripts\roulette.js" />
     <Content Include="Styles\dice.css" />
     <Content Include="Styles\index.css" />
+    <Content Include="Styles\roulette-table.css" />
+    <Content Include="Styles\roulette.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +153,7 @@
     <Compile Include="Controllers\DiceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\RouletteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -180,6 +187,7 @@
     <Content Include="Views\Profile\Deposit.cshtml" />
     <Content Include="Views\Profile\ChangePassword.cshtml" />
     <Content Include="Views\Dice\Index.cshtml" />
+    <Content Include="Views\Roulette\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
