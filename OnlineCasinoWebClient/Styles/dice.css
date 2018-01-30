@@ -1,0 +1,227 @@
+﻿@keyframes spin {
+    0% {
+        transform: translateZ(-100px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    }
+
+    16% {
+        transform: translateZ(-100px) rotateX(180deg) rotateY(180deg) rotateZ(0deg);
+    }
+
+    33% {
+        transform: translateZ(-100px) rotateX(360deg) rotateY(90deg) rotateZ(180deg);
+    }
+
+    50% {
+        transform: translateZ(-100px) rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+    }
+
+    66% {
+        transform: translateZ(-100px) rotateX(180deg) rotateY(360deg) rotateZ(270deg);
+    }
+
+    83% {
+        transform: translateZ(-100px) rotateX(270deg) rotateY(180deg) rotateZ(180deg);
+    }
+
+    100% {
+        transform: translateZ(-100px) rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+    }
+}
+
+@keyframes roll {
+    0% {
+        transform: translate3d(-200px,-50px,-400px)
+    }
+
+    12% {
+        transform: translate3d(0px,0,-100px)
+    }
+
+    25% {
+        transform: translate3d(200px,-50px,-400px)
+    }
+
+    37% {
+        transform: translate3d(0px,-100px,-800px)
+    }
+
+    50% {
+        transform: translate3d(-200px,-50px,-400px)
+    }
+
+    62% {
+        transform: translate3d(0px,0,-100px)
+    }
+
+    75% {
+        transform: translate3d(200px,-50px,-400px)
+    }
+
+    87% {
+        transform: translate3d(0px,-100px,-800px)
+    }
+
+    100% {
+        transform: translate3d(-200px,-50px,-400px)
+    }
+}
+
+.dice-platform.playing > .dice {
+    animation-duration: 1s;
+}
+
+.dice-platform.playing {
+    width: 200px;
+    height: 200px;
+    transform-style: preserve-3d;
+    animation: roll 1s infinite linear;
+}
+
+.dice-platform.stop > .dice,
+.dice-platform.stop {
+    animation-play-state: paused;
+}
+
+.dice-wrapper {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    perspective: 1200px;
+}
+
+.dice-platform {
+    width: 100px;
+    height: 100px;
+}
+
+.dice span {
+    position: absolute;
+    margin: 100px 0 0 100px;
+    display: block;
+    font-size: 2.5em;
+    padding: 10px;
+}
+
+.dice {
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    transform-style: preserve-3d;
+    transform: rotateX(0deg) rotateY(20deg) rotateZ(-20deg)
+}
+
+.dice-platform.playing > .dice {
+    animation: spin 2s infinite linear;
+}
+
+.side {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    box-shadow: inset 0 0 40px #ccc;
+    border-radius: 40px;
+}
+
+.dice .cover, .dice .inner {
+    background: #e0e0e0;
+    box-shadow: none;
+}
+
+.dice .cover {
+    border-radius: 0;
+}
+
+    .dice .cover.x {
+        transform: rotateY(90deg);
+    }
+
+    .dice .cover.z {
+        transform: rotateX(90deg);
+    }
+
+.dice .front {
+    transform: translateZ(50px);
+}
+
+    .dice .front.inner {
+        transform: translateZ(49.5px);
+    }
+
+.dice .back {
+    transform: rotateX(-180deg) translateZ(50px);
+}
+
+    .dice .back.inner {
+        transform: rotateX(-180deg) translateZ(49.5px);
+    }
+
+.dice .right {
+    transform: rotateY(90deg) translateZ(50px);
+}
+
+    .dice .right.inner {
+        transform: rotateY(90deg) translateZ(49.5px);
+    }
+
+.dice .left {
+    transform: rotateY(-90deg) translateZ(50px);
+}
+
+    .dice .left.inner {
+        transform: rotateY(-90deg) translateZ(49.5px);
+    }
+
+.dice .top {
+    transform: rotateX(90deg) translateZ(50px);
+}
+
+    .dice .top.inner {
+        transform: rotateX(90deg) translateZ(49.5px);
+    }
+
+.dice .bottom {
+    transform: rotateX(-90deg) translateZ(50px);
+}
+
+    .dice .bottom.inner {
+        transform: rotateX(-90deg) translateZ(49.5px);
+    }
+
+.dot {
+    position: absolute;
+    width: 20%;
+    height: 20%;
+    border-radius: 20px;
+    background: #444;
+    box-shadow: inset 5px 0 10px #000;
+}
+
+    .dot.center {
+        margin: 40% 0 0 40%;
+    }
+
+    .dot.dtop {
+        margin-top: 10%;
+    }
+
+    .dot.dleft {
+        margin-left: 70%;
+    }
+
+    .dot.dright {
+        margin-left: 10%;
+    }
+
+    .dot.dbottom {
+        margin-top: 70%;
+    }
+
+    .dot.center.dleft {
+        margin: 40% 0 0 10%;
+    }
+
+    .dot.center.dright {
+        margin: 40% 0 0 70%;
+    }
