@@ -129,6 +129,7 @@
     <Content Include="Scripts\betHandler.js" />
     <Content Include="Scripts\bootstrap-confirmation.js" />
     <Content Include="Scripts\dice.js" />
+    <Content Include="Scripts\global.js" />
     <Content Include="Scripts\index.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
