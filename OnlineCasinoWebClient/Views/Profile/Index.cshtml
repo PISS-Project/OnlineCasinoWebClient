@@ -62,11 +62,11 @@ alert('@TempData["message"].ToString()');
                             </table>
 
                             <a class="btn btn-primary" id="btnDeposit">Deposit</a>
-                            <a class="btn btn-primary" href="home" id="btnDeposit">Cancel</a>
+                            <a class="btn btn-primary" href="@Url.Action("Index", "Home")" id="btnDeposit">Cancel</a>
 
                             <div class="pull-right">
-                                <a id="btnEditProfile" title="Edit profile" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-                                <a id="btnDeleteAccount" title="Delete account" data-title="Do you want to delete your account?" data-toggle="confirmation" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                                <a id="btnEditProfile" title="Edit profile" data-toggle="tooltip" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+                                <a id="btnDeleteAccount" title="Delete account" data-title="Do you want to delete your account?" data-toggle="confirmation" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
                             </div>
                         </div>
                     </div>

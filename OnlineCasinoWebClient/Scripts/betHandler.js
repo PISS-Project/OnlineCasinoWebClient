@@ -79,7 +79,7 @@ function makeDiceRoll(rollNumber) {
 function sendRouletteBet() {
 
     var betAmount = parseInt(document.getElementById("betAmount").innerText);
-    if (betAmount <= 0) { alert("Invalid bet amount!"); return; }
+    if (betAmount <= 0) { alert("Please choose a sector from the board!"); return; }
     var selectedValues = getSelectedValues();
 
     if (selectedValues.length != 1 &&
@@ -90,7 +90,7 @@ function sendRouletteBet() {
         selectedValues.length != 12 &&
         selectedValues.length != 18)
     {
-        alert("Invalid bet values length!");
+        alert("Please choose a sector from the board!");
         return;
     }
 
