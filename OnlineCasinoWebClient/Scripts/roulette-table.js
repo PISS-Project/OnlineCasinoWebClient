@@ -197,6 +197,7 @@
                 }
             });
         }
+
         function makeInactive() {
             Array.from($(selectors.sector)).forEach(function (item) {
                 $(item).removeClass("active");

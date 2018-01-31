@@ -132,22 +132,6 @@ function createWheel() {
     //console.log(numberLoc);
 }
 
-btnSpin.click(function () {
-    rndNum = Math.floor(Math.random() * 34 + 0);
-    if ($("input").val() === "") {
-        winningNum = rndNum;
-    } else {
-        winningNum = $("input").val();
-    }
-    spinTo(winningNum);
-});
-
-$("#btnb").click(function () {
-    $(".spinner").css("font-size", "+=.3em");
-});
-$("#btns").click(function () {
-    $(".spinner").css("font-size", "-=.3em");
-});
 
 function resetAni() {
     animationPlayState = "animation-play-state";
@@ -168,7 +152,7 @@ function resetAni() {
     $("#rotate").html("");
 }
 
-function spinTo(num) {
+function spinTo(num, won) {
     //get location
     var temp = numberLoc[num][0] + 4;
 
@@ -179,7 +163,30 @@ function spinTo(num) {
     setTimeout(function () {
         bgrotateTo(rndSpace);
         ballrotateTo(rndSpace + temp);
+
+        $("#betResult").css({
+            "display": "none"
+        });
+        //show spin result
+        if (won) {
+            $("#betResult").text("Won");
+            $("#betResult").css({
+                "color": "seagreen"
+            });
+        }
+        else {
+            $("#betResult").text("Lost");
+            $("#betResult").css({
+                "color": "darkred"
+            });
+        }
+
     }, 500);
+}
+function finishSpin() {
+    $("#betResult").css({
+        "display": "block"
+    });
 }
 
 function ballrotateTo(deg) {

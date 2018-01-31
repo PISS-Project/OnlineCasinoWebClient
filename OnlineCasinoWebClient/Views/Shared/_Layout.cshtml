@@ -10,6 +10,7 @@
     <script src="~/Scripts/global.js"></script>
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/jquery.keyframes.min.js"></script>
+    <script src="~/Scripts/jquery-cookie.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
     <script src="~/Scripts/bootstrap-confirmation.js"></script>
@@ -27,15 +28,6 @@
                     <img alt="List View" src="@Url.Content("~/Assets/CasinoLogo.png")">
                 </a>
             </div>
-
-            @*<div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("Online Casino", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </div>*@
             @Html.Action("UserProfile", "Profile")
 
         </div>
