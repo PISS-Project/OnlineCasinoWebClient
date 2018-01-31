@@ -178,14 +178,12 @@
             if (typeof $(this).data('num') != 'undefined') {
                 makeInactive();
                 makeActive(String($(this).data('num')).split(','));
-                console.log(String($(this).data('num')).split(','));
             }
             else {
                 var sectorIndex = $(this).data('sector');
                 makeInactive();
                 makeActive(String(sectors[sectorIndex]).split(','));
                 $('.sector[data-sector="' + sectorIndex + '"]').addClass("active");
-                console.log(String(sectors[sectorIndex]));
             }
 
         });
