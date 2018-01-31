@@ -16,3 +16,13 @@
     });
 
 });
+function checkForm() {
+    var form1 = $("#register-form");
+    if (form1.find('input[name="password"]').val() != form1.find('input[name="confirmPassword"]').val()) {
+        alert("Passwords must be the same!");
+        form1.find('input[name="password"]').focus();
+        return false;
+    }
+    form1.submit();
+    return true;
+}
