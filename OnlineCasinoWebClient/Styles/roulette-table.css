@@ -5,9 +5,10 @@
 .roulette {
     /*margin: 40px;*/
     padding: 40px;
-    background: #1C7022;
+    background: darkgreen;
     display: table;
     position: relative;
+    border-radius: 20px;
     /*transform: rotate(90deg);
     margin:300px 0 0 -230px;*/
 }
@@ -85,31 +86,47 @@
     .roulette .tnum.hover {
         -moz-box-shadow: inset 0 0 5px #FFF, inset 0 0 5px #FFF;
         -webkit-box-shadow: inset 0 0 5px #FFF, inset 0 0 5px #FFF;
-        box-shadow: inset 0 0 5px #FFF, inset 0 0 5px #FFF;
+        box-shadow: inset 0 0 8px #FFF, inset 0 0 5px #FFF;
     }
 
     .roulette .sector.hover {
         background: #1C9022 !important;
-        color: #FBEC0F !important;
+        color: #FFF !important;
     }
 
     .roulette .green.hover {
         background: #3CC042 !important;
-        color: #FBEC0F !important;
+        color: #FFF !important;
     }
 
     .roulette .red.hover {
         background: #C00 !important;
-        color: #FBEC0F !important;
+        color: #FFF !important;
     }
 
     .roulette .black.hover {
         background: #000 !important;
+        color: #FFF !important;
+    }
+
+    .roulette .active {
         color: #FBEC0F !important;
     }
-    .roulette .sector.active,
-    .roulette .tnum.active  {
-        color: dodgerblue !important;
+
+    .roulette .sector.active {
+        background: #1C9022 !important;
+    }
+
+    .roulette .green.active {
+        background: #3CC042 !important;
+    }
+
+    .roulette .red.active {
+        background: #C00 !important;
+    }
+
+    .roulette .black.active {
+        background: #000 !important;
     }
     /* orientation */
     .roulette .vt {

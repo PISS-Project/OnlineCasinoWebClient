@@ -107,13 +107,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\BlackJackConstructionGameImage.png" />
+    <Content Include="Assets\BlackJackGameImage.png" />
+    <Content Include="Assets\CasinoLogo.png" />
     <Content Include="Assets\DeleteProfile.png" />
     <Content Include="Assets\Deposit.png" />
+    <Content Include="Assets\DiceGameImage.png" />
     <Content Include="Assets\EditProfile.png" />
     <Content Include="Assets\favicon.ico" />
     <Content Include="Assets\GamePlaceholderImage.jpg" />
     <Content Include="Assets\IndexBackground.jpg" />
     <Content Include="Assets\ProfileBackground.jpg" />
+    <Content Include="Assets\RouletteGameImage.png" />
     <Content Include="Assets\UserAvatar.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />

@@ -1,15 +1,21 @@
-﻿#betAmount {
+﻿.bettext {
+    font-size: 24px;
+    font-family: 'Trebuchet MS',Arial,sans-serif;
+    color: forestgreen;
+}
+
+#betAmount {
     font-size: 24px;
     text-align: center;
     border-radius: 10%;
     border: 3px ridge;
+    background: white;
 }
 
 #betResult {
     font-size: 30px;
     text-align: center;
 }
-
 
 .dice-bet {
     display: inline-block;
@@ -24,9 +30,9 @@
     cursor: pointer;
 }
 
-.dice-bet.active {
-    border-color: darkred;
-}
+    .dice-bet.active {
+        border-color: darkred;
+    }
 
 #bets-wrapper {
     margin: 5px 0;
