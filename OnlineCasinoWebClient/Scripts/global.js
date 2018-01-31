@@ -1,1 +1,1 @@
-﻿var domainName = "http://ocwebapi.azurewebsites.net/";
+﻿var domainName = "https://ocwebapi.azurewebsites.net/";
