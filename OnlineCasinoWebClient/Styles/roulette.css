@@ -1,17 +1,4 @@
-﻿.bgimg {
-    position: absolute;
-    right: 0;
-    top: -3em;
-    left: 0;
-    opacity: 0.92;
-    background-position: center;
-    background-repeat: repeat-y;
-    background-size: cover;
-    background-image: url("../Assets/gamebg1.jpg");
-    height: 100%;
-}
-
-.bettext {
+﻿.bettext {
     font-size: 24px;
     font-family: 'Trebuchet MS',Arial,sans-serif;
     color: forestgreen;
