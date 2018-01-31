@@ -1,6 +1,7 @@
-﻿//$(document).ready(function () {
-    (function ($) {
+﻿
 
+    (function ($) {
+        
         // table
         (function () {
             "use strict"
@@ -58,10 +59,10 @@
                     '5': [], // 2nd 12
                     '6': [], // 3rd 12
                     '7': [], // 1 to 18
-                    '8': [], // EVEN
+                    '8': [], // odd
                     '9': [], // RED
                     '10': [], // BLACK
-                    '11': [], // ODD
+                    '11': [], // even
                     '12': [], // 19 to 36
                 },
                 table_nums = {},
@@ -135,9 +136,9 @@
 
                 // ODD, EVEN
                 if (i % 2) {
-                    sectors['8'].push(i);
-                } else {
                     sectors['11'].push(i);
+                } else {
+                    sectors['8'].push(i);
                 }
 
                 if (numbers.red.indexOf(i) != -1) {
@@ -174,9 +175,36 @@
                     }
                 }
             ).click(function () {
-                console.log(String($(this).data('num')).split(','));
+                if (typeof $(this).data('num') != 'undefined') {
+                    makeInactive();
+                    makeActive(String($(this).data('num')).split(','));
+                    console.log(String($(this).data('num')).split(','));
+                }
+                else {
+                    var sectorIndex = $(this).data('sector');
+                    makeInactive();
+                    makeActive(String(sectors[sectorIndex]).split(','));
+                    $('.sector[data-sector="' + sectorIndex + '"]').addClass("active");
+                    console.log(String(sectors[sectorIndex]));
+                }
+                
             });
 
+            function makeActive(elements) {
+                Array.from($(selectors.num)).forEach(function (item) {
+                    if (elements.indexOf(item.innerText.trim()) > -1) {
+                        $(item).addClass("active");
+                    }
+                });
+            }
+            function makeInactive() {
+                Array.from($(selectors.sector)).forEach(function (item) {
+                    $(item).removeClass("active");
+                });
+                Array.from($(selectors.num)).forEach(function (item) {
+                        $(item).removeClass("active");
+                });
+            }
             /*console.log('1st row: ' + sectors['1']);
             console.log('2nd row: ' + sectors['2']);
             console.log('3rd row: ' + sectors['3']);
@@ -195,4 +223,3 @@
         })();
 
     })(jQuery);
-//});
