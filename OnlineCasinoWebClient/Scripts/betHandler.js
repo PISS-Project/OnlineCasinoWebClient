@@ -74,7 +74,7 @@ function sendDiceBet() {
 function sendRouletteBet() {
 
     var betAmount = parseInt(document.getElementById("betAmount").innerText);
-    if (betAmount <= 0) { alert("Invalid bet amount!"); return; }
+    if (betAmount <= 0) { alert("Please make a bet with valid amount!"); return; }
     var selectedValues = getSelectedValues();
 
     if (selectedValues.length != 1 &&

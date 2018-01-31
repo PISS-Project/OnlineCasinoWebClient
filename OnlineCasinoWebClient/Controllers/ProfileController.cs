@@ -66,7 +66,6 @@ namespace OnlineCasinoWebClient.Controllers
 
                     Session["user"] = newUser;
 
-                    TempData["message"] = "Profile was successfully updated!";
                     return await Task.FromResult(RedirectToAction("Index"));
                 }
                 else
@@ -93,7 +92,6 @@ namespace OnlineCasinoWebClient.Controllers
                 if (statusCode == HttpStatusCode.NoContent)
                 {
                     // should we do something with the session and cookies?
-                    TempData["message"] = "Password was successfully changed!";
                     return await Task.FromResult(RedirectToAction("Index"));
                 }
                 else
@@ -137,8 +135,6 @@ namespace OnlineCasinoWebClient.Controllers
                     };
 
                     Session["user"] = newUser;
-
-                    TempData["message"] = $"You have successfully updated your wallet. Amount added: {amount}";
                     return await Task.FromResult(View("Index", newUser));
                 }
                 else
