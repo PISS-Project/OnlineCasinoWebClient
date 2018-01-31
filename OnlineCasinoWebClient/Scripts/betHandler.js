@@ -79,7 +79,7 @@ function makeDiceRoll(rollNumber) {
 function sendRouletteBet() {
 
     var betAmount = parseInt(document.getElementById("betAmount").innerText);
-    if (betAmount <= 0) { alert("Please choose a sector from the board!"); return; }
+    if (betAmount <= 0) { alert("Please make a bet with valid amount!"); return; }
     var selectedValues = getSelectedValues();
 
     if (selectedValues.length != 1 &&
