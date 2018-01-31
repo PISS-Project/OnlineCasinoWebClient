@@ -24,6 +24,10 @@ function sendDiceBet() {
             generateAlert("Invalid bet amount!", "info");
             return;
         }
+        else if (!canBet(betAmount)) {
+            generateAlert("Insufficient balance!", "warning");
+            return;
+        }
         else if (betSum >= 2 && betSum <= 12) {
             $("#betButton").prop("disabled", true);
             
@@ -79,7 +83,12 @@ function sendRouletteBet() {
     if (betAmount <= 0) {
         generateAlert("Please make a bet with valid amount!", "info");
         return;
+    } else if (!canBet(betAmount)) {
+        generateAlert("Insufficient balance!", "warning");
+        return;
     }
+
+
     var selectedValues = getSelectedValues();
 
     if (selectedValues.length != 1 &&
@@ -155,4 +164,10 @@ function updateMoneyAmount(won, win, stake) {
     }
 
     document.getElementById("userMoney").innerText = savedUserMoney.toLocaleString("en");
+}
+
+function canBet(betAmount) {
+    var savedUserMoney = parseFloat($("#userMoney").text().split(",").join(""));
+
+    return betAmount <= savedUserMoney;
 }

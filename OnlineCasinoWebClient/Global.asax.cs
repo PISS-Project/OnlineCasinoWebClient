@@ -14,5 +14,22 @@ namespace OnlineCasinoWebClient
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
+
+        public void Application_Error(Object sender, EventArgs e)
+        {
+            Exception exception = Server.GetLastError();
+            Server.ClearError();
+
+            if (exception.GetType() == typeof(HttpException))
+            {
+                if (((HttpException)exception).GetHttpCode() == 404)
+                {
+                    Response.Redirect("/Error/NotFound");
+                    return;
+                }
+            }
+
+            Response.Redirect("/Error");
+        }
     }
 }

@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Not Found";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-lg-6 col-md-offset-2 col-lg-offset-3">
+            <div class="row">
+                <h1 class="text-center">404</h1>
+            </div>
+            <div class="row">
+                <h3 class="text-center">There doesn't seem to be anything here.</h3>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-lg-6 col-md-offset-2 col-lg-offset-3">
+                    <img src="~/Assets/404.png" class="img-responsive" />
+                </div>
+            </div>
+            <div class="row">
+                <h5 class="text-center">@Html.ActionLink("Go Back To Home Page", "Index", "Home")</h5>
+            </div>
+        </div>
+    </div>
+</div>
