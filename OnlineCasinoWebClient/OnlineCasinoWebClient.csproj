@@ -138,6 +138,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\betHandler.js" />
     <Content Include="Scripts\bootstrap-confirmation.js" />
+    <Content Include="Scripts\bootstrap-notify.min.js" />
     <Content Include="Scripts\dice.js" />
     <Content Include="Scripts\global.js" />
     <Content Include="Scripts\index.js" />
@@ -155,6 +156,7 @@
     <Content Include="Scripts\profile.js" />
     <Content Include="Scripts\roulette-table.js" />
     <Content Include="Scripts\roulette.js" />
+    <Content Include="Styles\animate.css" />
     <Content Include="Styles\dice.css" />
     <Content Include="Styles\index.css" />
     <Content Include="Styles\profile.css" />

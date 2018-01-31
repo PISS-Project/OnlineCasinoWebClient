@@ -11,7 +11,7 @@ function startRolling() {
     $('#platform2').removeClass('stop').addClass('playing');
 }
 
-function showDiceResult(dice1Num, dice2Num, won) {
+function showDiceResult(dice1Num, dice2Num, won, win, stake) {
 
     // Dice 1 Roll
     setTimeout(function () {
@@ -59,7 +59,7 @@ function showDiceResult(dice1Num, dice2Num, won) {
                 "color": "darkred"
             });
         }
-
+        updateMoneyAmount(won, win, stake);
     }, 3000);
 
     // Dice 2 Roll

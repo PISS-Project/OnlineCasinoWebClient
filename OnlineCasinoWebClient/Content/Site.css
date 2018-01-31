@@ -15,4 +15,6 @@ select,
 textarea {
     max-width: 280px;
 }
-
+[data-notify="container"] {
+    width: 150px;
+}

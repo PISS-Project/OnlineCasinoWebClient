@@ -2,7 +2,7 @@
 
 <p class="navbar-text navbar-right">
     <a href="/profile" class="navbar-link">@Model.FullName</a>
-    <a href="/profile"><span class="badge">@($"{@Model.Money:N2}")</span></a>
+    <a href="/profile"><span id="userMoney" class="badge">@($"{@Model.Money:N2}")</span></a>
     &nbsp;
     <a href="/home/logout" style="font-size: smaller">(Log out)</a>
 </p>

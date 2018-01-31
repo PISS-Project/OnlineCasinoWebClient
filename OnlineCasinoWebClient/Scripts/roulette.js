@@ -152,7 +152,7 @@ function resetAni() {
     $("#rotate").html("");
 }
 
-function spinTo(num, won) {
+function spinTo(num, won, win, stake) {
     //get location
     var temp = numberLoc[num][0] + 4;
 
@@ -162,34 +162,28 @@ function spinTo(num, won) {
     resetAni();
     setTimeout(function () {
         bgrotateTo(rndSpace);
-        ballrotateTo(rndSpace + temp);
-
-        $("#betResult").css({
-            "display": "none"
-        });
-        //show spin result
-        if (won) {
-            $("#betResult").text("Won");
-            $("#betResult").css({
-                "color": "seagreen"
-            });
-        }
-        else {
-            $("#betResult").text("Lost");
-            $("#betResult").css({
-                "color": "darkred"
-            });
-        }
-
+        ballrotateTo(rndSpace + temp, won, win, stake);
+        
     }, 500);
 }
-function finishSpin() {
-    $("#betResult").css({
-        "display": "block"
-    });
+function finishSpin(won, win, stake) {
+    if (won) {
+        $("#betResult").text("Won");
+        $("#betResult").css({
+            "color": "seagreen"
+        });
+    }
+    else {
+        $("#betResult").text("Lost");
+        $("#betResult").css({
+            "color": "darkred"
+        });
+    }
+    updateMoneyAmount(won, win, stake);
+
 }
 
-function ballrotateTo(deg) {
+function ballrotateTo(deg, won, win, stake) {
     var temptime = rotationsTime + 's';
     var dest = -360 * ballSpinTime - (360 - deg);
     $.keyframe.define({
@@ -207,7 +201,7 @@ function ballrotateTo(deg) {
         duration: temptime, // [optional, default: 0, in ms] how long you want it to last in milliseconds
         timingFunction: "ease-in-out", // [optional, default: ease] specifies the speed curve of the animation
         complete: function () {
-            finishSpin();
+            finishSpin(won, win, stake);
         } //[optional]  Function fired after the animation is complete. If repeat is infinite, the function will be fired every time the animation is restarted.
     });
 }
