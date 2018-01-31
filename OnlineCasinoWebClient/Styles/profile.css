@@ -1,0 +1,30 @@
+﻿
+body {
+    padding-top: 60px;
+}
+
+.bgimgprofile {
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 0;
+    opacity: 0.98;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("../Assets/ProfileBackground.jpg");
+    height: 100%;
+}
+
+#table_form td {
+    border: none;
+}
+
+#profile_info {
+    position: relative;
+}
+
+#edit_profile, #delete_profile, #deposit {
+    position: absolute;
+    visibility: hidden;
+}

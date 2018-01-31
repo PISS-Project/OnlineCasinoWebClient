@@ -107,8 +107,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\DeleteProfile.png" />
+    <Content Include="Assets\Deposit.png" />
+    <Content Include="Assets\EditProfile.png" />
+    <Content Include="Assets\favicon.ico" />
     <Content Include="Assets\GamePlaceholderImage.jpg" />
     <Content Include="Assets\IndexBackground.jpg" />
+    <Content Include="Assets\ProfileBackground.jpg" />
     <Content Include="Assets\UserAvatar.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -140,10 +145,12 @@
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery.keyframes.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\profile.js" />
     <Content Include="Scripts\roulette-table.js" />
     <Content Include="Scripts\roulette.js" />
     <Content Include="Styles\dice.css" />
     <Content Include="Styles\index.css" />
+    <Content Include="Styles\profile.css" />
     <Content Include="Styles\roulette-table.css" />
     <Content Include="Styles\roulette.css" />
     <Content Include="Web.config" />
@@ -161,7 +168,6 @@
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Requests\ChangePasswordRequest.cs" />
     <Compile Include="Requests\DeleteAccountRequest.cs" />
-    <Compile Include="Requests\DepositRequest.cs" />
     <Compile Include="Requests\EditProfileDataRequest.cs" />
     <Compile Include="Requests\LoginRequest.cs" />
     <Compile Include="Requests\RegisterRequest.cs" />
@@ -183,9 +189,6 @@
     <Content Include="Views\Home\Home.cshtml" />
     <Content Include="Views\Shared\_UserProfile.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
-    <Content Include="Views\Profile\Edit.cshtml" />
-    <Content Include="Views\Profile\Deposit.cshtml" />
-    <Content Include="Views\Profile\ChangePassword.cshtml" />
     <Content Include="Views\Dice\Index.cshtml" />
     <Content Include="Views\Roulette\Index.cshtml" />
     <None Include="Web.Debug.config">

@@ -11,11 +11,11 @@ body {
     right: 0;
     top: 0;
     left: 0;
-    opacity: 0.80;
+    opacity: 0.92;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url("~/Assets/IndexBackground.jpg");
+    background-image: url("../Assets/IndexBackground.jpg");
     height: 100%;
 }
 

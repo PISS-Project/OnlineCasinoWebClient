@@ -2,6 +2,6 @@
 {
     public class DepositResponse
     {
-        public decimal Balance { get; set; }
+        public object NewBalance { get; set; }
     }
 }

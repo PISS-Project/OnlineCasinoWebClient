@@ -1,8 +1,17 @@
 ﻿@model OnlineCasinoWebClient.Models.UserModel
 
 @{
-    ViewBag.Title = "Profile";
+    ViewBag.Title = Model.Username + " - Online Casino";
 }
+
+@section AddToHead{
+    <link href="@Url.Content("~/Styles/profile.css")" rel="stylesheet" type="text/css" />
+}
+
+@section AddToBottom{
+    <script src="@Url.Content("~/Scripts/profile.js")"></script>
+}
+
 @if (TempData["message"] != null)
 {
     <script>
@@ -17,16 +26,17 @@ alert('@TempData["message"].ToString()');
     @(TempData["message"] = null)
 }
 
-<div class="container">
+<div class="bgimgprofile"></div>
+
+<div class="container" id="profile_info">
     <div class="row">
         <div class="col-md-6  toppad  pull-right col-md-offset-3 ">
             <br>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-2 toppad">
-
             <div class="panel panel-info">
-                <div class="panel-heading"></div>
-                <div class="panel-body" >
+                <div class="panel-heading">Profile</div>
+                <div class="panel-body">
                     <div class="row">
                         <div class="col-md-3 col-lg-3 " align="center"> <img alt="Account Information" src="../Assets/UserAvatar.png" class="img-circle img-responsive"> </div>
                         <div class=" col-md-9 col-lg-9 ">
@@ -51,11 +61,169 @@ alert('@TempData["message"].ToString()');
                                 </tbody>
                             </table>
 
-                            <a href="profile/edit" class="btn btn-primary">Edit Profile</a>
-                            <a href="profile/deposit" class="btn btn-primary">Deposit</a>
+                            <a class="btn btn-primary" id="btnDeposit">Deposit</a>
+                            <a class="btn btn-primary" href="home" id="btnDeposit">Cancel</a>
+
                             <div class="pull-right">
-                                <a href="profile/changePassword" title="Change password" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-                                <a href="" title="Delete account" data-title="Do you want to delete your account?" data-toggle="confirmation" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                                <a id="btnEditProfile" title="Edit profile" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+                                <a id="btnDeleteAccount" title="Delete account" data-title="Do you want to delete your account?" data-toggle="confirmation" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="edit_profile">
+    <div class="row">
+        <div class="col-md-6  toppad  pull-right col-md-offset-3 ">
+            <br>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-2 toppad">
+            <div class="panel panel-info">
+                <div class="panel-heading">Edit account</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3 col-lg-3 " align="center"> <img alt="Account edit" src="../Assets/EditProfile.png" class="img-circle img-responsive"> </div>
+                        <div class=" col-md-9 col-lg-9 ">
+                            <div>
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#update_profile" data-toggle="tab">Profile</a></li>
+                                    <li><a href="#change_password" data-toggle="tab">Password</a></li>
+                                </ul>
+                                <br>
+                                <div id="myTabContent" class="tab-content">
+                                    <div class="tab-pane active in" id="update_profile">
+                                        <form id="editTab" action="/profile/edit" method="post" role="form">
+                                            <table class="table table-user-information" id="table_form">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Full Name:</td>
+                                                        <td><input name="fullname" type="text"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Email:</td>
+                                                        <td><input name="email" type="email"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div>
+                                                <input id="btnUpdate" type="submit" class="btn btn-primary" value="Update"/>
+                                                <a id="btnEditCancel" class="btn btn-primary">Cancel</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane fade" id="change_password">
+                                        <form id="changeTab" action="/profile/changepassword" method="post" role="form">
+                                            <table class="table table-user-information" id="table_form">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Old password:</td>
+                                                        <td><input name="oldpassword" type="password" minlength="6"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>New Password:</td>
+                                                        <td><input name="newpassword" type="password" minlength="6"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div>
+                                                <input id="btnChangePassword" type="submit" class="btn btn-primary" value="Change"/>
+                                                <a id="btnChangeCancel" class="btn btn-primary">Cancel</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="delete_profile">
+    <div class="row">
+        <div class="col-md-6  toppad  pull-right col-md-offset-3 ">
+            <br>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-2 toppad">
+            <div class="panel panel-info">
+                <div class="panel-heading">You must enter your password to perform account deletion...</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3 col-lg-3 " align="center"> <img alt="Delete account" src="../Assets/DeleteProfile.png" class="img-circle img-responsive"> </div>
+                        <div class=" col-md-9 col-lg-9 ">
+                            <div>
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#delete" data-toggle="tab">Are you sure?</a></li>
+                                </ul>
+                                <br>
+                                <div id="myTabContent" class="tab-content">
+                                    <div class="tab-pane active in">
+                                        <form id="delete" action="/profile/delete" method="post" role="form">
+                                            <table class="table table-user-information" id="table_form">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Password:</td>
+                                                        <td><input name="password" type="password" minlength="6"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div>
+                                                <input id="btnDelete" type="submit" class="btn btn-primary" value="Delete account" />
+                                                <a id="btnDeleteCancel" class="btn btn-primary">Cancel</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="deposit">
+    <div class="row">
+        <div class="col-md-6  toppad  pull-right col-md-offset-3 ">
+            <br>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-2 toppad">
+            <div class="panel panel-info">
+                <div class="panel-heading">Your current balance is <strong>@($"{@Model.Money:N2}")</strong></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3 col-lg-3 " align="center"> <img alt="Account edit" src="../Assets/Deposit.png" class="img-circle img-responsive"> </div>
+                        <div class=" col-md-9 col-lg-9 ">
+                            <div>
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#addMoney" data-toggle="tab">Deposit</a></li>
+                                </ul>
+                                <br>
+                                <div id="myTabContent" class="tab-content">
+                                    <div class="tab-pane active in">
+                                        <form id="addMoney" action="/profile/deposit" method="post" role="form">
+                                            <table class="table table-user-information" id="table_form">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Amount:</td>
+                                                        <td><input name="addmoney" type="number" step="0.1" value="1.0"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div>
+                                                <input id="btnAddMoney" type="submit" class="btn btn-primary" value="Add money" />
+                                                <a id="btnDepositCancel" class="btn btn-primary">Cancel</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

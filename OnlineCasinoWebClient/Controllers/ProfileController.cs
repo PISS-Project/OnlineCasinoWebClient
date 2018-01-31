@@ -3,6 +3,10 @@ using OnlineCasinoWebClient.Helpers;
 using OnlineCasinoWebClient.Models;
 using OnlineCasinoWebClient.Requests;
 using OnlineCasinoWebClient.Responses;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -28,11 +32,6 @@ namespace OnlineCasinoWebClient.Controllers
             var user = Session["user"] as UserModel;
 
             return await Task.FromResult(PartialView("_UserProfile", user));
-        }
-
-        public async Task<ActionResult> Edit()
-        {
-            return await Task.FromResult(View("Edit"));
         }
 
         [HttpPost]
@@ -68,19 +67,14 @@ namespace OnlineCasinoWebClient.Controllers
                     Session["user"] = newUser;
 
                     TempData["message"] = "Profile was successfully updated!";
-                    return await Task.FromResult(View("Index"));
+                    return await Task.FromResult(RedirectToAction("Index"));
                 }
                 else
                 {
                     TempData["message"] = "Error occurred while trying to change your password!";
-                    return await Task.FromResult(View("Index"));
+                    return await Task.FromResult(RedirectToAction("Index"));
                 }
             }
-        }
-
-        public async Task<ActionResult> ChangePassword()
-        {
-            return await Task.FromResult(View("ChangePassword"));
         }
 
         [HttpPost]
@@ -100,23 +94,18 @@ namespace OnlineCasinoWebClient.Controllers
                 {
                     // should we do something with the session and cookies?
                     TempData["message"] = "Password was successfully changed!";
-                    return await Task.FromResult(View("Index"));
+                    return await Task.FromResult(RedirectToAction("Index"));
                 }
                 else
                 {
                     TempData["message"] = "Error occurred while trying to change your password!";
-                    return await Task.FromResult(View("Index"));
+                    return await Task.FromResult(RedirectToAction("Index"));
                 }
             }
         }
 
-        public async Task<ActionResult> Deposit()
-        {
-            return await Task.FromResult(View("Deposit"));
-        }
-
         [HttpPost]
-        public async Task<ActionResult> Deposit(DepositRequest depositRequest)
+        public async Task<ActionResult> Deposit(string[] addMoney)
         {
             var user = Session["user"] as UserModel;
             if (user == null)
@@ -124,15 +113,17 @@ namespace OnlineCasinoWebClient.Controllers
 
             using (var client = new HttpClient())
             {
-                var request = RequestHelper.GenerateRequestMessage($"api/users/{user.UserId}/wallet", HttpMethod.Put, token: user.Token, json: depositRequest);
+                decimal.TryParse(addMoney.Single(), NumberStyles.Any, CultureInfo.InvariantCulture, out decimal amount);
+                var request = RequestHelper.GenerateRequestMessage($"api/users/{user.UserId}/wallet", HttpMethod.Put, token: user.Token, json: new { AddMoney = amount });
                 var response = await client.SendAsync(request);
                 var statusCode = response.StatusCode;
 
                 if (statusCode == HttpStatusCode.OK)
                 {
                     var cnt = await response.Content.ReadAsStringAsync();
-                    var newBalanceInfo = JsonConvert.DeserializeObject<DepositResponse>(cnt);
 
+                    var newBalanceInfo = JsonConvert.DeserializeObject<DepositResponse>(cnt);
+                    decimal.TryParse(newBalanceInfo.NewBalance.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out decimal balance);
                     // Add new user data to the session
                     var newUser = new UserModel()
                     {
@@ -142,20 +133,20 @@ namespace OnlineCasinoWebClient.Controllers
                         Username = user.Username,
                         FullName = user.FullName,
                         Email = user.Email,
-                        Money = newBalanceInfo.Balance
+                        Money = balance
                     };
 
                     Session["user"] = newUser;
 
-                    TempData["message"] = $"{depositRequest.Addmoney} money had been successfully added in your wallet.";
-                    return await Task.FromResult(RedirectToAction("Index"));
+                    TempData["message"] = $"You have successfully updated your wallet. Amount added: {amount}";
+                    return await Task.FromResult(View("Index", newUser));
                 }
                 else
                 {
-                    TempData["message"] = "Error occurred while trying to delete your account!";
-                    return await Task.FromResult(View("Index"));
+                    TempData["message"] = "Error occurred while trying to add money in your account!";
+                    return await Task.FromResult(RedirectToAction("Index"));
                 }
-            }
+            } 
         }
 
         public async Task<ActionResult> Delete(DeleteAccountRequest deleteAccountRequest)
@@ -170,15 +161,13 @@ namespace OnlineCasinoWebClient.Controllers
                 var response = await client.SendAsync(request);
                 var statusCode = response.StatusCode;
 
-                if (statusCode == HttpStatusCode.NoContent)
+                if (statusCode != HttpStatusCode.NoContent)
                 {
-                    Session["user"] = null;
-                    TempData["message"] = "Your account was successfully deleted.";
+                    TempData["message"] = "Error occurred while trying to delete your account!";
                     return await Task.FromResult(RedirectToAction("Index"));
                 }
                 else
                 {
-                    TempData["message"] = "Error occurred while trying to delete your account!";
                     return await Task.FromResult(RedirectToAction("Index"));
                 }
             }
