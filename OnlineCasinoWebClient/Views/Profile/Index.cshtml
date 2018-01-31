@@ -11,21 +11,6 @@
 @section AddToBottom{
     <script src="@Url.Content("~/Scripts/profile.js")"></script>
 }
-
-@if (TempData["message"] != null)
-{
-    <script>
-
-$(document).ready(function(){
-
-alert('@TempData["message"].ToString()');
-
-});
-
-    </script>
-    @(TempData["message"] = null)
-}
-
 <div class="bgimgprofile"></div>
 
 <div class="container" id="profile_info">

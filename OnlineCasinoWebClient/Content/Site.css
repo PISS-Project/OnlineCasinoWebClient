@@ -15,6 +15,6 @@ select,
 textarea {
     max-width: 280px;
 }
-[data-notify="container"] {
+.betContainer {
     width: 150px;
 }

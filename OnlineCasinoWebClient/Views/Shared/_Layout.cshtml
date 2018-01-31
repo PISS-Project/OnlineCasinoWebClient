@@ -16,10 +16,12 @@
     <script src="~/Scripts/bootstrap-notify.min.js"></script>
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
     <script src="~/Scripts/bootstrap-confirmation.js"></script>
+    <script src="~/Scripts/notify.js"></script>
     @if (IsSectionDefined("AddToHead"))
     {
         @RenderSection("AddToHead", required: false)
     }
+    @Html.Partial("_Alert");
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">

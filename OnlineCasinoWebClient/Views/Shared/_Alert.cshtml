@@ -1,0 +1,24 @@
+﻿<script>
+$(document).ready(function () {
+@if (TempData["success"] != null)
+{
+    @:generateAlert("@TempData["success"]", "success");
+    TempData["success"] = null;
+}
+@if (TempData["info"] != null)
+{
+    @:generateAlert("@TempData["info"]", "info");
+    TempData["info"] = null;
+}
+@if (TempData["warning"] != null)
+{
+    @:generateAlert("@TempData["warning"]", "warning");
+    TempData["warning"] = null;
+}
+@if (TempData["danger"] != null)
+{
+    @:generateAlert("@TempData["danger"]", "danger");
+    TempData["danger"] = null;
+}
+});
+</script>

@@ -21,11 +21,12 @@ function sendDiceBet() {
 
         var betSum = parseInt(selectedElement);
         if (betAmount <= 0) {
-            alert("Invalid bet amount!");
+            generateAlert("Invalid bet amount!", "info");
             return;
         }
         else if (betSum >= 2 && betSum <= 12) {
-
+            $("#betButton").prop("disabled", true);
+            
             var userId = Cookies.get("userId");
             var userToken = Cookies.get("token");
 
@@ -33,7 +34,6 @@ function sendDiceBet() {
                 "bet": betSum,
                 "stake": betAmount
             };
-
 
             $.ajax({
                 url: domainName + "api/users/" + userId + "/dicebets",
@@ -57,24 +57,29 @@ function sendDiceBet() {
                     // Roll the dice
                     showDiceResult(dice1Num, dice2Num, won, data.win, data.stake);
                 },
-                error: function () { alert('Something went wrong!'); }
+                error: function () {
+                    generateAlert("Something went wrong!", "danger");
+                    $("#betButton").prop("disabled", false);
+                }
             });
 
             startRolling();
         }
         else {
-            alert("Fuck you!");
+            generateAlert("Fuck you!", "success");
         }
     }
     else {
-        alert("Please select dice sum!");
+        generateAlert("Please select dice sum!", "info");
     }
 }
 
 function sendRouletteBet() {
-
     var betAmount = parseInt(document.getElementById("betAmount").innerText);
-    if (betAmount <= 0) { alert("Please make a bet with valid amount!"); return; }
+    if (betAmount <= 0) {
+        generateAlert("Please make a bet with valid amount!", "info");
+        return;
+    }
     var selectedValues = getSelectedValues();
 
     if (selectedValues.length != 1 &&
@@ -84,9 +89,11 @@ function sendRouletteBet() {
         selectedValues.length != 6 &&
         selectedValues.length != 12 &&
         selectedValues.length != 18) {
-        alert("Invalid bet values length!");
+        generateAlert("Please select a valid bet!", "info");
         return;
     }
+
+    $("#betButton").prop("disabled", true);
 
     var userId = Cookies.get("userId");
     var userToken = Cookies.get("token");
@@ -108,11 +115,12 @@ function sendRouletteBet() {
             var won = !(data.win == 0);
 
             spinTo(spinResult, won, data.win, data.stake);
-
         },
-        error: function () { alert('Something went wrong!'); }
+        error: function () {
+            generateAlert("Something went wrong!", "danger");
+            $("#betButton").prop("disabled", false);
+        }
     });
-
 }
 
 function getSelectedValues() {
@@ -130,56 +138,21 @@ function getSelectedValues() {
     return intValues;
 }
 
-function generateAlert(message, type) {
-    var offsetXCalc = (document.body.getBoundingClientRect().right - $("#userMoney")[0].getBoundingClientRect().right) - 30;
-
-    $.notify({
-        // options
-        message: message,
-        icon: 'glyphicon glyphicon-euro'
-    },
-        {
-            // settings
-            type: type,
-            allow_dismiss: false,
-            offset: {
-                x: offsetXCalc,
-                y: 55
-            },
-
-            z_index: 1031,
-            delay: 3000,
-            animate: {
-                enter: 'animated bounceInRight',
-                exit: 'animated bounceOutRight'
-            },
-            template: '<div data-notify="container" class="alert alert-{0}" role="alert">' +
-            '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
-            '<span data-notify="icon"></span> ' +
-            '<span data-notify="title">{1}</span> ' +
-            '<span data-notify="message">{2}</span>' +
-            '<div class="progress" data-notify="progressbar">' +
-            '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
-            '</div>' +
-            '<a href="{3}" target="{4}" data-notify="url"></a>' +
-            '</div>'
-
-        });
-}
-
 function updateMoneyAmount(won, win, stake) {
-    var savedUserMoney = parseFloat($("#userMoney").text().replace(",", ""));
+    $("#betButton").prop("disabled", false);
+
+    var savedUserMoney = parseFloat($("#userMoney").text().split(",").join(""));
     var winAmount = parseFloat(win) - parseFloat(stake);
     var stakeAmount = parseFloat(stake);
 
     if (won) {
         savedUserMoney = savedUserMoney + winAmount;
-        generateAlert(" You won " + winAmount + "!", "success" );
+        notifyForBetResult(" You won " + winAmount + "!", "success" );
     }
     else {
         savedUserMoney = savedUserMoney + (stakeAmount * -1);
-        generateAlert(" You lost " + stakeAmount + "!", "danger");
+        notifyForBetResult(" You lost " + stakeAmount + "!", "danger");
     }
 
-    document.getElementById("userMoney").innerText = savedUserMoney;
+    document.getElementById("userMoney").innerText = savedUserMoney.toLocaleString("en");
 }

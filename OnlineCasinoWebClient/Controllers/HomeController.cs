@@ -78,13 +78,29 @@ namespace OnlineCasinoWebClient.Controllers
                             && user.UserId == userId
                             && user.Token.Equals(token.Value))
                         {
-                            return await Task.FromResult(View("Home", user));
+                            // Get user balance
+                            using (var client = new HttpClient())
+                            {
+                                var request = RequestHelper.GenerateRequestMessage($"api/users/{userId}/wallet", HttpMethod.Get, token: token.Value);
+                                var response = await client.SendAsync(request);
+                                var statusCode = response.StatusCode;
+
+                                if (statusCode == HttpStatusCode.OK)
+                                {
+                                    var cnt = await response.Content.ReadAsStringAsync();
+                                    var walletData = JsonConvert.DeserializeObject<UserWalletResponse>(cnt);
+
+                                    user.Money = walletData.Balance;
+
+                                    return await Task.FromResult(View("Home", user));
+                                }
+                            }
                         }
                     }                    
                 }
 
                 // Error in cookie data
-                ViewBag.Message = "Invalid cookies. Please login again!";
+                TempData["danger"] = "Invalid cookies. Please login again!";
                 foreach (var cookie in cookies.AllKeys)
                 {
                     HttpContext.Response.Cookies[cookie].Expires = DateTime.Now.AddDays(-1);
@@ -106,18 +122,18 @@ namespace OnlineCasinoWebClient.Controllers
 
                 if (statusCode == HttpStatusCode.Created)
                 {
-                    ViewBag.Message = "Account was created. Please login!";
-                    return await Task.FromResult(View("Index", "~/Views/Shared/_AuthenticationLayout.cshtml"));
+                    TempData["success"] = "Account was created successfully!";
+                    return await Task.FromResult(RedirectToAction("Index", "Home"));
                 }
                 else if (statusCode == HttpStatusCode.Conflict)
                 {
-                    ViewBag.Message = "Username is already taken!";
-                    return await Task.FromResult(View("Index", "~/Views/Shared/_AuthenticationLayout.cshtml"));
+                    TempData["danger"] = "Username is already taken!";
+                    return await Task.FromResult(RedirectToAction("Index", "Home"));
                 }
                 else
                 {
-                    ViewBag.Message = "Error occurred while trying to create an account!";
-                    return await Task.FromResult(View("Index", "~/Views/Shared/_AuthenticationLayout.cshtml"));
+                    TempData["danger"] = "Error occurred while trying to create an account!";
+                    return await Task.FromResult(RedirectToAction("Index", "Home"));
                 }
             }
         }
@@ -155,8 +171,8 @@ namespace OnlineCasinoWebClient.Controllers
                 }
                 else
                 {
-                    ViewBag.Message = "Authorization failed. Please enter valid account info!";
-                    return await Task.FromResult(View("Index", "~/Views/Shared/_AuthenticationLayout.cshtml"));
+                    TempData["warning"] = "Authorization failed. Please enter valid account info!";
+                    return await Task.FromResult(RedirectToAction("Index", "Home"));
                 }
             }
         }
@@ -186,6 +202,8 @@ namespace OnlineCasinoWebClient.Controllers
                             {
                                 HttpContext.Response.Cookies[cookie].Expires = DateTime.Now.AddDays(-1);
                             }
+
+                            TempData["info"] = "Logged out!";
                             return await Task.FromResult(RedirectToAction("Index", "Home"));
                         }
                     }
@@ -193,7 +211,7 @@ namespace OnlineCasinoWebClient.Controllers
             }
 
             Session.RemoveAll();
-            ViewBag.Message = "Invalid cookies. Please try again!";
+            TempData["warning"] = "Already logged out!";
             return await Task.FromResult(RedirectToAction("Index", "Home"));
         }
     }

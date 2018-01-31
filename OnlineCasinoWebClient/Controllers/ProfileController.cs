@@ -21,7 +21,7 @@ namespace OnlineCasinoWebClient.Controllers
         {
             var user = Session["user"] as UserModel;
             if (user == null)
-                return await Task.FromResult(View("~/Views/Home/Index.cshtml", "~/Views/Shared/_AuthenticationLayout.cshtml"));
+                return await Task.FromResult(RedirectToAction("Index", "Home"));
 
             return await Task.FromResult(View("Index", user));
         }
@@ -30,6 +30,8 @@ namespace OnlineCasinoWebClient.Controllers
         public async Task<ActionResult> UserProfile()
         {
             var user = Session["user"] as UserModel;
+            if (user == null)
+                return await Task.FromResult(RedirectToAction("Index", "Home"));
 
             return await Task.FromResult(PartialView("_UserProfile", user));
         }
@@ -39,7 +41,7 @@ namespace OnlineCasinoWebClient.Controllers
         {
             var user = Session["user"] as UserModel;
             if (user == null)
-                return await Task.FromResult(View("~/Views/Home/Index.cshtml", "~/Views/Shared/_AuthenticationLayout.cshtml"));
+                return await Task.FromResult(RedirectToAction("Index", "Home"));
 
             using (var client = new HttpClient())
             {
@@ -66,12 +68,13 @@ namespace OnlineCasinoWebClient.Controllers
 
                     Session["user"] = newUser;
 
-                    return await Task.FromResult(RedirectToAction("Index"));
+                    TempData["success"] = "Profile data edited successfully!";
+                    return await Task.FromResult(RedirectToAction("Index", "Profile"));
                 }
                 else
                 {
-                    TempData["message"] = "Error occurred while trying to change your password!";
-                    return await Task.FromResult(RedirectToAction("Index"));
+                    TempData["danger"] = "Error occurred while trying to edit your profile!";
+                    return await Task.FromResult(RedirectToAction("Index", "Profile"));
                 }
             }
         }
@@ -81,7 +84,7 @@ namespace OnlineCasinoWebClient.Controllers
         {
             var user = Session["user"] as UserModel;
             if (user == null)
-                return await Task.FromResult(View("~/Views/Home/Index.cshtml", "~/Views/Shared/_AuthenticationLayout.cshtml"));
+                return await Task.FromResult(RedirectToAction("Index", "Home"));
 
             using (var client = new HttpClient())
             {
@@ -91,12 +94,12 @@ namespace OnlineCasinoWebClient.Controllers
 
                 if (statusCode == HttpStatusCode.NoContent)
                 {
-                    // should we do something with the session and cookies?
-                    return await Task.FromResult(RedirectToAction("Index"));
+                    TempData["success"] = "Password was changed successfully!";
+                    return await Task.FromResult(RedirectToAction("Index", "Profile"));
                 }
                 else
                 {
-                    TempData["message"] = "Error occurred while trying to change your password!";
+                    TempData["danger"] = "Error occurred while trying to change your password!";
                     return await Task.FromResult(RedirectToAction("Index"));
                 }
             }
@@ -107,7 +110,7 @@ namespace OnlineCasinoWebClient.Controllers
         {
             var user = Session["user"] as UserModel;
             if (user == null)
-                return await Task.FromResult(View("~/Views/Home/Index.cshtml", "~/Views/Shared/_AuthenticationLayout.cshtml"));
+                return await Task.FromResult(RedirectToAction("Index", "Home"));
 
             using (var client = new HttpClient())
             {
@@ -135,12 +138,14 @@ namespace OnlineCasinoWebClient.Controllers
                     };
 
                     Session["user"] = newUser;
+
+                    TempData["success"] = "Money was added successfully!";
                     return await Task.FromResult(View("Index", newUser));
                 }
                 else
                 {
-                    TempData["message"] = "Error occurred while trying to add money in your account!";
-                    return await Task.FromResult(RedirectToAction("Index"));
+                    TempData["danger"] = "Error occurred while trying to add money in your account!";
+                    return await Task.FromResult(RedirectToAction("Index", "Profile"));
                 }
             } 
         }
@@ -149,7 +154,7 @@ namespace OnlineCasinoWebClient.Controllers
         {
             var user = Session["user"] as UserModel;
             if (user == null)
-                return await Task.FromResult(View("~/Views/Home/Index.cshtml", "~/Views/Shared/_AuthenticationLayout.cshtml"));
+                return await Task.FromResult(RedirectToAction("Index", "Home"));
 
             using (var client = new HttpClient())
             {
@@ -159,12 +164,20 @@ namespace OnlineCasinoWebClient.Controllers
 
                 if (statusCode != HttpStatusCode.NoContent)
                 {
-                    TempData["message"] = "Error occurred while trying to delete your account!";
-                    return await Task.FromResult(RedirectToAction("Index"));
+                    TempData["danger"] = "Error occurred while trying to delete your account!";
+                    return await Task.FromResult(RedirectToAction("Index", "Profile"));
                 }
                 else
                 {
-                    return await Task.FromResult(RedirectToAction("Index"));
+                    // Remove session
+                    Session["user"] = null;
+                    foreach (var cookie in HttpContext.Request.Cookies.AllKeys)
+                    {
+                        HttpContext.Response.Cookies[cookie].Expires = DateTime.Now.AddDays(-1);
+                    }
+
+                    TempData["info"] = "Account deleted!";
+                    return await Task.FromResult(RedirectToAction("Index", "Home"));
                 }
             }
         }

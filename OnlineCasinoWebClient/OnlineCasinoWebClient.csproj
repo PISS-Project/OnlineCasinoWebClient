@@ -153,6 +153,7 @@
     <Content Include="Scripts\jquery-cookie.js" />
     <Content Include="Scripts\jquery.keyframes.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\notify.js" />
     <Content Include="Scripts\profile.js" />
     <Content Include="Scripts\roulette-table.js" />
     <Content Include="Scripts\roulette.js" />
@@ -200,6 +201,7 @@
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Dice\Index.cshtml" />
     <Content Include="Views\Roulette\Index.cshtml" />
+    <Content Include="Views\Shared\_Alert.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -209,7 +211,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
