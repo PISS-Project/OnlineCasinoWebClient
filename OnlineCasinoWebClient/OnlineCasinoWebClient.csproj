@@ -107,7 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\404.png" />
+    <Content Include="Assets\404.gif" />
     <Content Include="Assets\BlackJackConstructionGameImage.png" />
     <Content Include="Assets\BlackJackGameImage.png" />
     <Content Include="Assets\CasinoLogo.png" />
