@@ -86,11 +86,11 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>Full Name:</td>
-                                                        <td><input name="fullname" type="text" placeholder="@Model.FullName"></td>
+                                                        <td><input name="fullname" type="text" value="@Model.FullName" required></td>
                                                     </tr>
                                                     <tr>
                                                         <td>Email:</td>
-                                                        <td><input name="email" type="email" placeholder="@Model.Email"></td>
+                                                        <td><input name="email" type="email" value="@Model.Email" required minlength="3"></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -106,11 +106,11 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>Old password:</td>
-                                                        <td><input name="oldpassword" type="password" minlength="6"></td>
+                                                        <td><input name="oldpassword" type="password" minlength="6" required></td>
                                                     </tr>
                                                     <tr>
                                                         <td>New Password:</td>
-                                                        <td><input name="newpassword" type="password" minlength="6"></td>
+                                                        <td><input name="newpassword" type="password" minlength="6" required></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
